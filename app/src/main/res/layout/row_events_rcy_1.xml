@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp">
+
+
+        <TextView
+            android:id="@+id/nameLBL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:textAllCaps="true"
+            android:textColor="@color/chateauGreen"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Desert Duels Elims" />
+
+        <TextView
+            android:id="@+id/venueLBL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/nameLBL"
+            app:layout_constraintTop_toBottomOf="@+id/nameLBL"
+            tools:text="SAC Hall" />
+
+        <TextView
+            android:id="@+id/categoryLBL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/venueLBL"
+            app:layout_constraintTop_toBottomOf="@+id/venueLBL"
+            tools:text="Dance" />
+
+        <TextView
+            android:id="@+id/timeLBL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/categoryLBL"
+            app:layout_constraintEnd_toStartOf="@+id/favoriteBTN"
+            app:layout_constraintTop_toTopOf="@+id/venueLBL"
+            tools:text="23:30" />
+
+        <ImageButton
+            android:id="@+id/favoriteBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:background="@color/clear"
+            android:tint="@color/wildStrawberry"
+            app:layout_constraintBottom_toBottomOf="@+id/timeLBL"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/timeLBL"
+            app:srcCompat="@drawable/ic_favorite_24dp" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

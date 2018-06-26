@@ -4,15 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context="com.example.nishant.genericx.EventListActivity">
 
     <TextView
+        android:id="@+id/screenNameLBL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        android:background="@color/gorse"
+        android:paddingBottom="4dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:text="Events"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/menuBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@color/clear"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/screenNameLBL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/screenNameLBL"
+        app:srcCompat="@drawable/ic_menu_32dp" />
+
+    <ImageButton
+        android:id="@+id/filterBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@color/clear"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/screenNameLBL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/screenNameLBL"
+        app:srcCompat="@drawable/ic_filter_32dp" />
+
+    <View
+        android:id="@+id/bottomNavPlaceHolderPOV"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pageTitleLBL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/chateauGreen"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/nextPageBTN"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/prevPageBTN"
+        app:layout_constraintTop_toBottomOf="@+id/screenNameLBL"
+        tools:text="October 31" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/eventsRCY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavPlaceHolderPOV"
+        app:layout_constraintEnd_toEndOf="@+id/pageTitleLBL"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/pageTitleLBL"
+        app:layout_constraintTop_toBottomOf="@+id/pageTitleLBL"
+        tools:listitem="@layout/row_events_rcy_1" />
+
+    <ImageButton
+        android:id="@+id/nextPageBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/clear"
+        android:tint="@color/gorse"
+        app:layout_constraintBottom_toBottomOf="@+id/eventsRCY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pageTitleLBL"
+        app:srcCompat="@drawable/ic_chevron_right_32dp" />
+
+    <ImageButton
+        android:id="@+id/prevPageBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/clear"
+        android:tint="@color/gorse"
+        app:layout_constraintBottom_toBottomOf="@+id/eventsRCY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pageTitleLBL"
+        app:srcCompat="@drawable/ic_chevron_left_32dp" />
 
 </android.support.constraint.ConstraintLayout>

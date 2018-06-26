@@ -9,7 +9,7 @@ To progress with a clear path, here's the intended road-map for this app:
 - [X] Using the Room Library, make an implementation of Repository. This should be purely Room based i.e no network stuff.
 - [X] Setup Dagger2.
 - [ ] Setup the ViewModel for EventListActivity.
-- [ ] Make the layouts for EventListActivity.
+- [X] Make the layouts for EventListActivity.
 - [ ] Setup a basic EventListActivity(it should be able to display unfiltered data; don't setup bottom nav bar, nav drawer, filtering or favoriting).
 - [ ] Introduce favoriting. Introduce notifications later. For now, favorites should be able to get stored and retrieved.
 - [ ] Make the layouts for Filtering Dialog.
