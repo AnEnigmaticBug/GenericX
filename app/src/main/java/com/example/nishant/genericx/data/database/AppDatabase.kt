@@ -11,7 +11,7 @@ import com.example.nishant.genericx.data.model.Event
 
 @Database(entities = [Event::class], version = 1, exportSchema = false)
 @TypeConverters(TypeConverter::class)
-abstract class EventDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao
 }
