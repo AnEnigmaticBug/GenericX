@@ -4,7 +4,7 @@ This app is intended to be used as the base upon which the official apps for Oas
 
 To progress with a clear path, here's the intended road-map for this app:
 - [X] Make the Event class.
-- [ ] Decide the interface a Repository should have.
+- [X] Decide the interface a Repository should have.
 - [ ] Setup the Room Library.
 - [ ] Using the Room Library, make an implementation of Repository. This should be purely Room based i.e no network stuff.
 - [ ] Setup Dagger2.
