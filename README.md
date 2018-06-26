@@ -7,7 +7,7 @@ To progress with a clear path, here's the intended road-map for this app:
 - [X] Decide the interface a Repository should have.
 - [X] Setup the Room Library.
 - [X] Using the Room Library, make an implementation of Repository. This should be purely Room based i.e no network stuff.
-- [ ] Setup Dagger2.
+- [X] Setup Dagger2.
 - [ ] Setup the ViewModel for EventListActivity.
 - [ ] Make the layouts for EventListActivity.
 - [ ] Setup a basic EventListActivity(it should be able to display unfiltered data; don't setup bottom nav bar, nav drawer, filtering or favoriting).
