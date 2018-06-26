@@ -6,7 +6,7 @@ To progress with a clear path, here's the intended road-map for this app:
 - [X] Make the Event class.
 - [X] Decide the interface a Repository should have.
 - [X] Setup the Room Library.
-- [ ] Using the Room Library, make an implementation of Repository. This should be purely Room based i.e no network stuff.
+- [X] Using the Room Library, make an implementation of Repository. This should be purely Room based i.e no network stuff.
 - [ ] Setup Dagger2.
 - [ ] Setup the ViewModel for EventListActivity.
 - [ ] Make the layouts for EventListActivity.
