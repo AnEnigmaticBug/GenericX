@@ -2,6 +2,8 @@ package com.example.nishant.genericx.data.repository
 
 import com.example.nishant.genericx.data.database.EventDao
 import com.example.nishant.genericx.data.model.Event
+import com.example.nishant.genericx.data.model.EventFilter
+import com.example.nishant.genericx.data.model.UserPreferences
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 
@@ -39,5 +41,14 @@ class RoomRepository(private val eventDao: EventDao) : EventRepository {
                 .take(1)
                 .map { Event(it.id, it.name, it.description, it.category, it.venue, it.datetime, status) }
                 .subscribe { eventDao.update(it) }
+    }
+
+    /**
+     * In real life, this would use SharedPreferences. But for now it is hard-coded.
+     * */
+    override fun getUserPreferences(): Flowable<UserPreferences> = Flowable.just(UserPreferences(EventFilter()))
+
+    override fun setUserPreferences(userPreferences: UserPreferences) {
+        //Set shared preferences.
     }
 }

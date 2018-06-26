@@ -1,6 +1,7 @@
 package com.example.nishant.genericx.data.repository
 
 import com.example.nishant.genericx.data.model.Event
+import com.example.nishant.genericx.data.model.UserPreferences
 import io.reactivex.Flowable
 
 /**
@@ -18,4 +19,8 @@ interface EventRepository {
     fun makeFavorite(eventId: String)
 
     fun undoFavorite(eventId: String)
+
+    fun getUserPreferences(): Flowable<UserPreferences>
+
+    fun setUserPreferences(userPreferences: UserPreferences)
 }
