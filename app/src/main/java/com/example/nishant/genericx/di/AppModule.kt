@@ -4,6 +4,8 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import com.example.nishant.genericx.data.database.AppDatabase
 import com.example.nishant.genericx.data.database.EventDao
+import com.example.nishant.genericx.data.repository.EventRepository
+import com.example.nishant.genericx.data.repository.RoomRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -14,6 +16,9 @@ import javax.inject.Singleton
 
 @Module
 class AppModule(private val context: Context) {
+
+    @Provides @Singleton
+    fun providesEventRepository(noteDao: EventDao): EventRepository = RoomRepository(noteDao)
 
     @Provides @Singleton
     fun providesEventDao(appDatabase: AppDatabase): EventDao = appDatabase.eventDao()
