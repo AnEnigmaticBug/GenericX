@@ -14,13 +14,13 @@ interface EventRepository {
 
     fun getEventById(eventId: String): Flowable<Event>
 
-    fun getFavorites(): Flowable<List<Event>>
+    val favorites: Flowable<List<Event>>
 
     fun makeFavorite(eventId: String)
 
     fun undoFavorite(eventId: String)
 
-    fun getUserPreferences(): Flowable<UserPreferences>
+    val userPreferences: Flowable<UserPreferences>
 
     fun setUserPreferences(userPreferences: UserPreferences)
 }

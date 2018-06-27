@@ -1,5 +1,7 @@
 package com.example.nishant.genericx.data.model
 
+import java.util.*
+
 /**
  * Created by AnEnigmaticBug on 26/6/18.
  */
@@ -8,4 +10,4 @@ package com.example.nishant.genericx.data.model
  * It stores all the settings which the users have tweaked such as event filters, notification
  * settings(not implemented yet) etc.
  * */
-data class UserPreferences(val eventFilter: EventFilter)
+data class UserPreferences(val eventFilter: EventFilter, val criterion: Criterion)
