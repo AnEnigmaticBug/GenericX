@@ -27,7 +27,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Desert Duels Elims" />
+            tools:text="@sample/events.json/events/ByCategory/name" />
 
         <TextView
             android:id="@+id/venueLBL"
@@ -39,7 +39,7 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/nameLBL"
             app:layout_constraintTop_toBottomOf="@+id/nameLBL"
-            tools:text="SAC Hall" />
+            tools:text="@sample/events.json/events/ByCategory/venue" />
 
         <TextView
             android:id="@+id/dateLBL"
@@ -52,7 +52,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/venueLBL"
             app:layout_constraintTop_toBottomOf="@+id/venueLBL"
-            tools:text="01-11-2017" />
+            tools:text="@sample/events.json/events/ByCategory/date" />
 
         <TextView
             android:id="@+id/timeLBL"
@@ -66,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/categoryLBL"
             app:layout_constraintEnd_toStartOf="@+id/favoriteBTN"
             app:layout_constraintTop_toTopOf="@+id/venueLBL"
-            tools:text="23:30" />
+            tools:text="@sample/events.json/events/ByCategory/time" />
 
         <ImageButton
             android:id="@+id/favoriteBTN"

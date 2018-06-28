@@ -1,0 +1,20 @@
+{ "events":
+{
+  "ByEventDay": [
+    {"name": "Portuguese Embassy", "category": "Misc", "date": "31-10-2017", "time": "18:00", "venue": "Rotunda"},
+    {"name": "Inauguration Ceremony", "category": "Misc", "date": "31-10-2017", "time": "19:00", "venue": "Audi"},
+    {"name": "Free Jam", "category": "Music", "date": "31-10-2017", "time": "22:00", "venue": "M Lawns"},
+    {"name": "Hogathon", "category": "Misc", "date": "31-10-2017", "time": "22:30", "venue": "Stalls"},
+    {"name": "The Night's Watch", "category": "Misc", "date": "31-10-2017", "time": "23:00", "venue": "FD3 Terrace"},
+    {"name": "Street Dance Elims", "category": "Dance", "date": "23:30", "time": "23:59", "venue": "SAC Hall"}
+  ],
+  "ByCategory": [
+    {"name": "Portuguese Embassy", "category": "Misc", "date": "31-10-2017", "time": "18:00", "venue": "Rotunda"},
+    {"name": "Inauguration Ceremony", "category": "Misc", "date": "31-10-2017", "time": "19:00", "venue": "Audi"},
+    {"name": "Hogathon", "category": "Misc", "date": "31-10-2017", "time": "22:30", "venue": "Stalls"},
+    {"name": "The Night's Watch", "category": "Misc", "date": "31-10-2017", "time": "23:00", "venue": "FD3 Terrace"},
+    {"name": "Speed Scrabble 1", "category": "Misc", "date": "01-10-2017", "time": "10:00", "venue": "FD2 Cooler"},
+    {"name": "Wordstock", "category": "Misc", "date": "01-10-2017", "time": "14:00", "venue": "FD2 2219"}
+  ]
+}
+}
