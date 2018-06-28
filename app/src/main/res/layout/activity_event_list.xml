@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootCTL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -51,16 +52,6 @@
         app:layout_constraintTop_toTopOf="@+id/screenNameLBL"
         app:srcCompat="@drawable/ic_filter_32dp" />
 
-    <View
-        android:id="@+id/bottomNavPlaceHolderPOV"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/pageTitleLBL"
         android:layout_width="0dp"
@@ -87,9 +78,10 @@
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavPlaceHolderPOV"
         app:layout_constraintEnd_toEndOf="@+id/pageTitleLBL"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/pageTitleLBL"
         app:layout_constraintTop_toBottomOf="@+id/pageTitleLBL"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/row_events_rcy_1" />
 
     <ImageButton
@@ -117,5 +109,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pageTitleLBL"
         app:srcCompat="@drawable/ic_chevron_left_32dp" />
+
+    <FrameLayout
+        android:id="@+id/filterMenuHolderFRM"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavPlaceHolderPOV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/screenNameLBL" />
+
+    <View
+        android:id="@+id/bottomNavPlaceHolderPOV"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
