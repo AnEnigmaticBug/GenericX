@@ -23,17 +23,17 @@ class RoomRepository(private val eventDao: EventDao) : EventRepository {
         Observable.just(1)
                 .subscribeOn(Schedulers.io())
                 .subscribe {
-                    eventDao.insert(Event(name = "Street Dance Elims", venue = Venue.Venue1, category = Category.Category1, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Portuguese Embassy", venue = Venue.Venue1, category = Category.Category2, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Inauguration Ceremony", venue = Venue.Venue1, category = Category.Category2, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Free Jam", venue = Venue.Venue1, category = Category.Category3, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Hogathon", venue = Venue.Venue1, category = Category.Category2, datetime = Date(), isFavorite = true, description = ""))
+                    eventDao.insert(Event(name = "Street Dance Elims", venue = Venue.Venue1, category = Category.Category1, datetime = Date(1541030400000), isFavorite = false, description = ""))
+                    eventDao.insert(Event(name = "Portuguese Embassy", venue = Venue.Venue1, category = Category.Category2, datetime = Date(1541116800000), isFavorite = false, description = ""))
+                    eventDao.insert(Event(name = "Inauguration Ceremony", venue = Venue.Venue1, category = Category.Category2, datetime = Date(1541030400000), isFavorite = true, description = ""))
+                    eventDao.insert(Event(name = "Free Jam", venue = Venue.Venue1, category = Category.Category3, datetime = Date(1541116800000), isFavorite = false, description = ""))
+                    eventDao.insert(Event(name = "Hogathon", venue = Venue.Venue1, category = Category.Category2, datetime = Date(1541116800000), isFavorite = false, description = ""))
                     eventDao.insert(Event(name = "The Night's Watch", venue = Venue.Venue1, category = Category.Category2, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Stage Play 1", venue = Venue.Venue1, category = Category.Category3, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Stage Play 2", venue = Venue.Venue1, category = Category.Category3, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Street Play", venue = Venue.Venue1, category = Category.Category3, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Speed Scrabble 1", venue = Venue.Venue1, category = Category.Category2, datetime = Date(), isFavorite = true, description = ""))
-                    eventDao.insert(Event(name = "Exposure", venue = Venue.Venue1, category = Category.Category1, datetime = Date(), isFavorite = true, description = ""))
+                    eventDao.insert(Event(name = "Stage Play 1", venue = Venue.Venue1, category = Category.Category3, datetime = Date(1541030400000), isFavorite = true, description = ""))
+                    eventDao.insert(Event(name = "Stage Play 2", venue = Venue.Venue1, category = Category.Category3, datetime = Date(1541203200000), isFavorite = false, description = ""))
+                    eventDao.insert(Event(name = "Street Play", venue = Venue.Venue1, category = Category.Category3, datetime = Date(1541030400000), isFavorite = false, description = ""))
+                    eventDao.insert(Event(name = "Speed Scrabble 1", venue = Venue.Venue1, category = Category.Category2, datetime = Date(1541203200000), isFavorite = false, description = ""))
+                    eventDao.insert(Event(name = "Exposure", venue = Venue.Venue1, category = Category.Category1, datetime = Date(1541203200000), isFavorite = true, description = ""))
                 }
     }
 
@@ -66,7 +66,7 @@ class RoomRepository(private val eventDao: EventDao) : EventRepository {
      * In real life, this would use SharedPreferences. But for now it is hard-coded.
      * */
     override val userPreferences: Flowable<UserPreferences> =
-            Flowable.just(UserPreferences(EventFilter(), Criterion.Category))
+            Flowable.just(UserPreferences(EventFilter(), Criterion.EventDay))
 
     override fun setUserPreferences(userPreferences: UserPreferences) {
         //Set shared preferences.

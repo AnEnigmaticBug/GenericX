@@ -9,15 +9,15 @@ import java.util.*
 
 /**
  * @property datetime is initialized with the Date.time value of the EventDay's beginning. It is the
- * number of milliseconds elapsed since January 1,1970. For eg: 1534464000 is the value to represent
- * 17th Aug 2018.
+ * number of milliseconds elapsed since January 1,1970. For eg: 1534464000000 is the value used to
+ * represent 17th Aug 2018.
  *
  * Using an enum makes it simpler to use the filter and increases type-safety.
  * */
 enum class EventDay(val datetime: Date) {
-    Day1(Date(1541030400)),
-    Day2(Date(1541116800)),
-    Day3(Date(1541203200));
+    Day1(Date(1541030400000)),
+    Day2(Date(1541116800000)),
+    Day3(Date(1541203200000));
 
     /**
      * Converts to form suitable for display in UI as PageTitle.

@@ -11,13 +11,13 @@ import io.reactivex.Flowable
 @Dao
 interface EventDao {
 
-    @Query("SELECT * FROM events")
+    @Query("SELECT * FROM events ORDER BY category, datetime")
     fun getAllEvents(): Flowable<List<Event>>
 
     @Query("SELECT * FROM events WHERE id = :id")
     fun getEventById(id: String): Flowable<Event>
 
-    @Query("SELECT * FROM events WHERE isFavorite = 1")
+    @Query("SELECT * FROM events WHERE isFavorite = 1 ORDER BY category, datetime")
     fun getFavorites(): Flowable<List<Event>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
