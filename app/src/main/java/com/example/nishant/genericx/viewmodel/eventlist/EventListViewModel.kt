@@ -12,7 +12,9 @@ import com.example.nishant.genericx.util.modulo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -83,22 +85,41 @@ class EventListViewModel : ViewModel() {
         }
     }
 
+    /**
+     * This cute little variable is actually pretty critical to this app's functioning. If, in place
+     * of this, compositeDisposable was used, it would cause increasing an amount of flickering to
+     * take place.
+     *
+     * This is because compositeDisposable would dispose its subscriptions only when the ViewModel
+     * would be cleared. This means that every time we called showPageByCategory(or EventDay), a new
+     * subscription would come into existence, each running in parallel and each able to change the
+     * eventsToDisplay variable and most damningly, each with its own filter. This would cause all
+     * sorts of visual artifacts.
+     *
+     * TL;DR: Don't remove this variable unless you know what you're doing.
+     * */
+    private var disposable: Disposable? = null
+
     private fun showPageByCategory() {
         val category = Category.values()[pageNumber]
         (pageTitle as MutableLiveData).value = category.prettyString()
-        compositeDisposable.add(filteredEvents
+
+        disposable?.dispose()
+        disposable = filteredEvents
                 .map { it.filter { it.category == category } }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { (eventsToDisplay as MutableLiveData).value = it })
+                .subscribe { (eventsToDisplay as MutableLiveData).value = it }
     }
 
     private fun showPageByEventDay() {
         val eventDay = EventDay.values()[pageNumber]
         (pageTitle as MutableLiveData).value = eventDay.prettyString()
-        compositeDisposable.add(filteredEvents
+
+        disposable?.dispose()
+        disposable = filteredEvents
                 .map { it.filter { it.datetime.isOnSameDay(eventDay.datetime) } }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { (eventsToDisplay as MutableLiveData).value = it })
+                .subscribe { (eventsToDisplay as MutableLiveData).value = it }
     }
 
     fun toggleFavorite(event: Event) {
@@ -110,6 +131,7 @@ class EventListViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        disposable?.dispose()
         compositeDisposable.clear()
     }
 }
