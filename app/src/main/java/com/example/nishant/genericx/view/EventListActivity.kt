@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.nishant.genericx.data.model.Criterion
 import com.example.nishant.genericx.data.model.Event
 import com.example.nishant.genericx.util.formattedDate
 import com.example.nishant.genericx.util.formattedTime
+import com.example.nishant.genericx.util.setTint
 import com.example.nishant.genericx.viewmodel.eventlist.EventListViewModel
 import kotlinx.android.synthetic.main.activity_event_list.*
 import java.util.*
@@ -61,7 +63,7 @@ class EventListActivity : AppCompatActivity() {
         var events: List<Event>
     }
 
-    class EventsAdapterByEventDay : RecyclerView.Adapter<EventsAdapterByEventDay.EventsVHolder>(), HasEvents {
+    inner class EventsAdapterByEventDay : RecyclerView.Adapter<EventsAdapterByEventDay.EventsVHolder>(), HasEvents {
 
         override var events: List<Event> = listOf()
             set(value) {
@@ -80,9 +82,16 @@ class EventListActivity : AppCompatActivity() {
             holder.timeLBL.text = event.datetime.formattedTime()
             holder.venueLBL.text = event.venue.displayValue
             holder.categoryLBL.text = event.category.prettyString()
+            when(event.isFavorite) {
+                true  -> holder.favoriteBTN.setTint(R.color.wildStrawberry)
+                false -> holder.favoriteBTN.setTint(R.color.shadyLady)
+            }
+            holder.favoriteBTN.setOnClickListener {
+                viewModel.toggleFavorite(event)
+            }
         }
 
-        class EventsVHolder(val rootPOV: View) : RecyclerView.ViewHolder(rootPOV) {
+        inner class EventsVHolder(val rootPOV: View) : RecyclerView.ViewHolder(rootPOV) {
 
             val nameLBL: TextView = rootPOV.findViewById(R.id.nameLBL)
             val timeLBL: TextView = rootPOV.findViewById(R.id.timeLBL)
@@ -93,7 +102,7 @@ class EventListActivity : AppCompatActivity() {
         }
     }
 
-    class EventsAdapterByCategory : RecyclerView.Adapter<EventsAdapterByCategory.EventsVHolder>(), HasEvents {
+    inner class EventsAdapterByCategory : RecyclerView.Adapter<EventsAdapterByCategory.EventsVHolder>(), HasEvents {
 
         override var events: List<Event> = listOf()
             set(value) {
@@ -112,13 +121,16 @@ class EventListActivity : AppCompatActivity() {
             holder.dateLBL.text = event.datetime.formattedDate()
             holder.timeLBL.text = event.datetime.formattedTime()
             holder.venueLBL.text = event.venue.displayValue
+            when(event.isFavorite) {
+                true  -> holder.favoriteBTN.setTint(R.color.wildStrawberry)
+                false -> holder.favoriteBTN.setTint(R.color.shadyLady)
+            }
+            holder.favoriteBTN.setOnClickListener {
+                viewModel.toggleFavorite(event)
+            }
         }
 
-        private fun extractDate(datetime: Date): String {
-            return "${datetime.date}"
-        }
-
-        class EventsVHolder(val rootPOV: View) : RecyclerView.ViewHolder(rootPOV) {
+        inner class EventsVHolder(val rootPOV: View) : RecyclerView.ViewHolder(rootPOV) {
 
             val nameLBL: TextView = rootPOV.findViewById(R.id.nameLBL)
             val dateLBL: TextView = rootPOV.findViewById(R.id.dateLBL)

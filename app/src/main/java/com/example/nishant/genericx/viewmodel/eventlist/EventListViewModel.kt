@@ -3,6 +3,7 @@ package com.example.nishant.genericx.viewmodel.eventlist
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import com.example.nishant.genericx.GenericXApp
 import com.example.nishant.genericx.data.model.*
 import com.example.nishant.genericx.data.repository.EventRepository
@@ -11,6 +12,7 @@ import com.example.nishant.genericx.util.modulo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -22,11 +24,12 @@ class EventListViewModel : ViewModel() {
     @Inject
     lateinit var repository: EventRepository
 
-    private val compositeDisposable = CompositeDisposable()
-
     init {
         GenericXApp.appComponent.inject(this)
     }
+
+
+    private val compositeDisposable = CompositeDisposable()
 
     /**
      * It always lies in [0, criterion.values().size). Its used as an index to determine the current
@@ -96,6 +99,13 @@ class EventListViewModel : ViewModel() {
                 .map { it.filter { it.datetime.isOnSameDay(eventDay.datetime) } }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { (eventsToDisplay as MutableLiveData).value = it })
+    }
+
+    fun toggleFavorite(event: Event) {
+        when(event.isFavorite) {
+            true  -> repository.undoFavorite(event.id)
+            false -> repository.makeFavorite(event.id)
+        }
     }
 
     override fun onCleared() {

@@ -1,5 +1,7 @@
 package com.example.nishant.genericx.util
 
+import android.support.v4.content.ContextCompat
+import android.widget.ImageButton
 import java.util.*
 
 /**
@@ -45,4 +47,8 @@ fun Date.isOnSameDay(date: Date) = this.date == date.date && this.month == date.
 fun Int.modulo(n: Int): Int {
     val r = this.rem(n)
     return if(r < 0) r + n else r
+}
+
+fun ImageButton.setTint(colorResId: Int) {
+    setColorFilter(ContextCompat.getColor(this.context, colorResId), android.graphics.PorterDuff.Mode.SRC_IN)
 }
