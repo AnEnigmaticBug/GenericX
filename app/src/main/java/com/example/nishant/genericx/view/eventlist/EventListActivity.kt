@@ -1,10 +1,9 @@
-package com.example.nishant.genericx.view
+package com.example.nishant.genericx.view.eventlist
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,11 +17,12 @@ import com.example.nishant.genericx.data.model.Event
 import com.example.nishant.genericx.util.formattedDate
 import com.example.nishant.genericx.util.formattedTime
 import com.example.nishant.genericx.util.setTint
+import com.example.nishant.genericx.view.eventlist.filter.FilterItemListFragment
+import com.example.nishant.genericx.view.eventlist.filter.FilterMainMenuFragment
 import com.example.nishant.genericx.viewmodel.eventlist.EventListViewModel
 import kotlinx.android.synthetic.main.activity_event_list.*
-import java.util.*
 
-class EventListActivity : AppCompatActivity() {
+class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionListener, FilterItemListFragment.ActionListener {
 
     private lateinit var viewModel: EventListViewModel
 
@@ -56,9 +56,37 @@ class EventListActivity : AppCompatActivity() {
 
         nextPageBTN.setOnClickListener { viewModel.showNextPage() }
         prevPageBTN.setOnClickListener { viewModel.showPrevPage() }
+
+        filterBTN.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.filterMenuHolderFRM, FilterMainMenuFragment(), "FilterMenu")
+                    .commit()
+        }
     }
 
-    interface HasEvents {
+    override fun removeCurrentFragment() {
+        supportFragmentManager.beginTransaction()
+                .remove(supportFragmentManager.fragments.last())
+                .commit()
+    }
+
+    override fun onSearchBTNClicked() {
+    }
+
+    override fun showEventFilterItemList(type: FilterMainMenuFragment.ItemType) {
+        val bundle = Bundle().also { it.putString("TYPE", type.toString()) }
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.filterMenuHolderFRM, FilterItemListFragment().also { it.arguments = bundle })
+                .commit()
+    }
+
+    override fun showEventFilterMainMenu() {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.filterMenuHolderFRM, FilterMainMenuFragment())
+                .commit()
+    }
+
+    private interface HasEvents {
 
         var events: List<Event>
     }

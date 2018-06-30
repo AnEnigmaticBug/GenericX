@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".GenericXApp">
-        <activity android:name=".view.EventListActivity"
+        <activity android:name=".view.eventlist.EventListActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

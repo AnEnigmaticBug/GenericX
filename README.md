@@ -13,7 +13,7 @@ To progress with a clear path, here's the intended road-map for this app:
 - [X] Setup a basic EventListActivity(it should be able to display unfiltered data; don't setup bottom nav bar, nav drawer, filtering or favoriting).
 - [X] Introduce favoriting. Introduce notifications later. For now, favorites should be able to get stored and retrieved.
 - [X] Make the layouts for Filtering Dialog.
-- [ ] Introduce filtering.
+- [X] Introduce filtering.
 - [ ] Setup Firebase.
 - [ ] Make another implementation of Repository. This should work using both the Room Library and Firebase.
 - [ ] Setup notifications.
