@@ -1,5 +1,6 @@
 package com.example.nishant.genericx.data.repository
 
+import com.example.nishant.genericx.data.LocalStorage
 import com.example.nishant.genericx.data.database.EventDao
 import com.example.nishant.genericx.data.model.*
 import io.reactivex.Flowable
@@ -16,7 +17,7 @@ import java.util.*
  * obviously a purely offline repository. It is NOT going to be used in the final app.
  * */
 
-class RoomRepository(private val eventDao: EventDao) : EventRepository {
+class RoomRepository(private val eventDao: EventDao, private val localStorage: LocalStorage) : EventRepository {
 
     //Just for testing purposes. Remove once no longer needed.
     init {
@@ -65,10 +66,9 @@ class RoomRepository(private val eventDao: EventDao) : EventRepository {
     /**
      * In real life, this would use SharedPreferences. But for now it is hard-coded.
      * */
-    override val userPreferences: Flowable<UserPreferences> =
-            Flowable.just(UserPreferences(EventFilter(), Criterion.EventDay))
+    override val userPreferences: Flowable<UserPreferences> = localStorage.getUserPreferences()
 
     override fun setUserPreferences(userPreferences: UserPreferences) {
-        //Set shared preferences.
+        localStorage.setUserPreferences(userPreferences)
     }
 }
