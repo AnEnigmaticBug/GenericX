@@ -37,30 +37,23 @@ class CategoryListViewModel : FilterItemListViewModel() {
                 })
     }
 
-    override fun toggleItem(name: String) {
+    override fun toggleItem(position: Int) {
         repository.userPreferences
                 .take(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    val toggledCategory = Category.valueOf(name)
-                    val updatedCategories = when(it.eventFilter.categories.contains(toggledCategory)) {
-                        true  -> it.eventFilter.categories.toMutableList().also { it.remove(toggledCategory) }
-                        false -> it.eventFilter.categories.toMutableList().also { it.add(toggledCategory) }
-                    }
+                    val updatedCategories = it.eventFilter.categories.toggle(Category.values()[position])
                     repository.setUserPreferences(
                             UserPreferences(
-                                    EventFilter(
-                                            updatedCategories,
-                                            it.eventFilter.venues,
-                                            it.eventFilter.days,
-                                            it.eventFilter.isFavorite,
-                                            it.eventFilter.isOngoing
-                                    ),
+                                    it.eventFilter.withCategories(updatedCategories),
                                     it.criterion
                             )
                     )
                 }
     }
+
+    private fun EventFilter.withCategories(categories: List<Category>) =
+            EventFilter(categories, this.venues, this.days, this.isFavorite, this.isOngoing)
 
     override fun onCleared() {
         super.onCleared()

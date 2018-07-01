@@ -14,15 +14,16 @@ import android.widget.TextView
 import com.example.nishant.genericx.R
 import com.example.nishant.genericx.data.model.Criterion
 import com.example.nishant.genericx.data.model.Event
-import com.example.nishant.genericx.util.formattedDate
-import com.example.nishant.genericx.util.formattedTime
+import com.example.nishant.genericx.util.prettyDate
+import com.example.nishant.genericx.util.prettyTime
 import com.example.nishant.genericx.util.setTint
 import com.example.nishant.genericx.view.eventlist.filter.FilterItemListFragment
+import com.example.nishant.genericx.view.eventlist.filter.FilterListType
 import com.example.nishant.genericx.view.eventlist.filter.FilterMainMenuFragment
 import com.example.nishant.genericx.viewmodel.eventlist.EventListViewModel
 import kotlinx.android.synthetic.main.activity_event_list.*
 
-class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionListener, FilterItemListFragment.ActionListener {
+class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, FilterItemListFragment.Listener {
 
     private lateinit var viewModel: EventListViewModel
 
@@ -35,8 +36,8 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
         viewModel.criterion.observe(this, Observer {
             if(it != null) {
                 eventsRCY.adapter = when(it) {
-                    Criterion.EventDay -> EventsAdapterByEventDay()
-                    Criterion.Category -> EventsAdapterByCategory()
+                    Criterion.EventDay -> EventsByEventDayAdapter()
+                    Criterion.Category -> EventsByCategoryAdapter()
                 }
             }
         })
@@ -64,6 +65,10 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
         }
     }
 
+
+
+    //Fragment related code
+
     override fun removeCurrentFragment() {
         supportFragmentManager.beginTransaction()
                 .remove(supportFragmentManager.fragments.last())
@@ -73,7 +78,7 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
     override fun onSearchBTNClicked() {
     }
 
-    override fun showEventFilterItemList(type: FilterMainMenuFragment.ItemType) {
+    override fun showEventFilterItemList(type: FilterListType) {
         val bundle = Bundle().also { it.putString("TYPE", type.toString()) }
         supportFragmentManager.beginTransaction()
                 .replace(R.id.filterMenuHolderFRM, FilterItemListFragment().also { it.arguments = bundle })
@@ -86,12 +91,16 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
                 .commit()
     }
 
+
+
+    //RecyclerView Adapters
+
     private interface HasEvents {
 
         var events: List<Event>
     }
 
-    inner class EventsAdapterByEventDay : RecyclerView.Adapter<EventsAdapterByEventDay.EventsVHolder>(), HasEvents {
+    inner class EventsByEventDayAdapter : RecyclerView.Adapter<EventsByEventDayAdapter.EventsVHolder>(), HasEvents {
 
         override var events: List<Event> = listOf()
             set(value) {
@@ -107,8 +116,8 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
         override fun onBindViewHolder(holder: EventsVHolder, position: Int) {
             val event = events[position]
             holder.nameLBL.text = event.name
-            holder.timeLBL.text = event.datetime.formattedTime()
-            holder.venueLBL.text = event.venue.displayValue
+            holder.timeLBL.text = event.datetime.prettyTime()
+            holder.venueLBL.text = event.venue.prettyString()
             holder.categoryLBL.text = event.category.prettyString()
             when(event.isFavorite) {
                 true  -> holder.favoriteBTN.setTint(R.color.wildStrawberry)
@@ -130,7 +139,7 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
         }
     }
 
-    inner class EventsAdapterByCategory : RecyclerView.Adapter<EventsAdapterByCategory.EventsVHolder>(), HasEvents {
+    inner class EventsByCategoryAdapter : RecyclerView.Adapter<EventsByCategoryAdapter.EventsVHolder>(), HasEvents {
 
         override var events: List<Event> = listOf()
             set(value) {
@@ -146,9 +155,9 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.ActionList
         override fun onBindViewHolder(holder: EventsVHolder, position: Int) {
             val event = events[position]
             holder.nameLBL.text = event.name
-            holder.dateLBL.text = event.datetime.formattedDate()
-            holder.timeLBL.text = event.datetime.formattedTime()
-            holder.venueLBL.text = event.venue.displayValue
+            holder.dateLBL.text = event.datetime.prettyDate()
+            holder.timeLBL.text = event.datetime.prettyTime()
+            holder.venueLBL.text = event.venue.prettyString()
             when(event.isFavorite) {
                 true  -> holder.favoriteBTN.setTint(R.color.wildStrawberry)
                 false -> holder.favoriteBTN.setTint(R.color.shadyLady)

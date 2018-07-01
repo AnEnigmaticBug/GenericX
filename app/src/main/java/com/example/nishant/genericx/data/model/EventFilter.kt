@@ -14,10 +14,10 @@ class EventFilter(val categories: List<Category> = Category.values().toList(),
                   val days: List<EventDay> = EventDay.values().toList(),
                   val isFavorite: Boolean = false,
                   val isOngoing: Boolean = false) {
-
+    
     companion object {
 
-        fun satisfiesEvent(event: Event, filter: EventFilter): Boolean {
+        fun isSatisfiedByEvent(event: Event, filter: EventFilter): Boolean {
             return event.category in filter.categories &&
                     event.venue in filter.venues &&
                     event.happensOnOneOfDays(filter.days) &&

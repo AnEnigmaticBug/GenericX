@@ -3,7 +3,6 @@ package com.example.nishant.genericx.viewmodel.eventlist
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.example.nishant.genericx.GenericXApp
 import com.example.nishant.genericx.data.model.*
 import com.example.nishant.genericx.data.repository.EventRepository
@@ -13,8 +12,6 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -54,7 +51,7 @@ class EventListViewModel : ViewModel() {
                     (criterion as MutableLiveData).value = it.criterion
                     val userPrefs = it
                     filteredEvents = repository.events
-                            .map { it.filter { EventFilter.satisfiesEvent(it, userPrefs.eventFilter) } }
+                            .map { it.filter { EventFilter.isSatisfiedByEvent(it, userPrefs.eventFilter) } }
                     showNextPage()
                 })
     }

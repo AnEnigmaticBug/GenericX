@@ -109,7 +109,7 @@ class FilterMainMenuViewModel : ViewModel() {
     }
 
     fun resetToDefaults() {
-        repository.setUserPreferences(UserPreferences(EventFilter(), Criterion.EventDay))
+        repository.setUserPreferences(UserPreferences())
     }
 
     override fun onCleared() {

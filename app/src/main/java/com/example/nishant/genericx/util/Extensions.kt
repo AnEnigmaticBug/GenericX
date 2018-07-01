@@ -11,12 +11,12 @@ import java.util.*
 /**
  * Represents date in the format dd-mm-yyyy
  * */
-fun Date.formattedDate() = "${doubleDigitify(date)}-${doubleDigitify(month)}-$year"
+fun Date.prettyDate() = "${doubleDigitify(date)}-${doubleDigitify(month)}-$year"
 
 /**
  * Represents time in the format hh:mm
  * */
-fun Date.formattedTime() = "${doubleDigitify(hours)}:${doubleDigitify(minutes)}"
+fun Date.prettyTime() = "${doubleDigitify(hours)}:${doubleDigitify(minutes)}"
 
 /**
  * Represents numbers from 0-99 in the double digit form. For eg: 1 becomes "01" 81 becomes "81".

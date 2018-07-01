@@ -30,37 +30,31 @@ class VenueListViewModel : FilterItemListViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     val userPrefs = it
+                    //Each venue is associated with its presence in the user preferences.
                     (itemList as MutableLiveData).value =
-                            Venue.values().map { it.displayValue }
+                            Venue.values().map { it.prettyString() }
                                     .zip(Venue.values().map { it in userPrefs.eventFilter.venues })
                                     .toFilterItemList()
                 })
     }
 
-    override fun toggleItem(name: String) {
+    override fun toggleItem(position: Int) {
         repository.userPreferences
                 .take(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    val toggledVenue = Venue.valueOf(name)
-                    val updatedVenues = when (it.eventFilter.venues.contains(toggledVenue)) {
-                        true -> it.eventFilter.venues.toMutableList().also { it.remove(toggledVenue) }
-                        false -> it.eventFilter.venues.toMutableList().also { it.add(toggledVenue) }
-                    }
+                    val updatedVenues = it.eventFilter.venues.toggle(Venue.values()[position])
                     repository.setUserPreferences(
                             UserPreferences(
-                                    EventFilter(
-                                            it.eventFilter.categories,
-                                            updatedVenues,
-                                            it.eventFilter.days,
-                                            it.eventFilter.isFavorite,
-                                            it.eventFilter.isOngoing
-                                    ),
+                                    it.eventFilter.withVenues(updatedVenues),
                                     it.criterion
                             )
                     )
                 }
     }
+
+    private fun EventFilter.withVenues(venues: List<Venue>) =
+            EventFilter(this.categories, venues, this.days, this.isFavorite, this.isOngoing)
 
     override fun onCleared() {
         super.onCleared()
