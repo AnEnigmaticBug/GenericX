@@ -15,7 +15,7 @@ To progress with a clear path, here's the intended road-map for this app:
 - [X] Make the layouts for Filtering Dialog.
 - [X] Introduce filtering.
 - [X] Setup Firebase.
-- [ ] Make another implementation of Repository. This should work using both the Room Library and Firebase.
+- [X] Make another implementation of Repository. This should work using both the Room Library and Firebase.
 - [ ] Setup notifications.
 - [ ] Get the navigation drawer working. Break this into separate checkpoints.
 - [ ] Ready the bottom navigation bar. Again, this can be many checkpoints.

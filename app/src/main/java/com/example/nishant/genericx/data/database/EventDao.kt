@@ -17,6 +17,9 @@ interface EventDao {
     @Query("SELECT * FROM events WHERE id = :id")
     fun getEventById(id: String): Flowable<Event>
 
+    @Query("SELECT COUNT(id) FROM events WHERE id = :id")
+    fun eventExists(id: String): Boolean
+
     @Query("SELECT * FROM events WHERE isFavorite = 1 ORDER BY category, datetime")
     fun getFavorites(): Flowable<List<Event>>
 

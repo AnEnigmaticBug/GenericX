@@ -5,7 +5,9 @@ import android.content.Context
 import com.example.nishant.genericx.data.LocalStorage
 import com.example.nishant.genericx.data.database.AppDatabase
 import com.example.nishant.genericx.data.database.EventDao
+import com.example.nishant.genericx.data.firebase.FirestoreDatabase
 import com.example.nishant.genericx.data.repository.EventRepository
+import com.example.nishant.genericx.data.repository.FirestoreRepository
 import com.example.nishant.genericx.data.repository.RoomRepository
 import dagger.Module
 import dagger.Provides
@@ -19,7 +21,11 @@ import javax.inject.Singleton
 class AppModule(private val context: Context) {
 
     @Provides @Singleton
-    fun providesEventRepository(noteDao: EventDao, localStorage: LocalStorage): EventRepository = RoomRepository(noteDao, localStorage)
+    fun providesEventRepository(noteDao: EventDao, localStorage: LocalStorage, firestoreDatabase: FirestoreDatabase): EventRepository =
+            FirestoreRepository(noteDao, localStorage, firestoreDatabase)
+
+    @Provides @Singleton
+    fun providesFirestoreDatabase() = FirestoreDatabase()
 
     @Provides @Singleton
     fun providesLocalStorage(context: Context) = LocalStorage(context)
