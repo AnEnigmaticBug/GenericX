@@ -5,16 +5,22 @@ package com.example.nishant.genericx.data.model
 */
 
 enum class Category {
-    Category1,
-    Category2,
-    Category3;
+    Dance,
+    Misc,
+    Drama,
+    Photography,
+    Oratory,
+    Music;
 
     /**
      * Converts to a form suitable for display in UI as PageTitle.
      * */
     fun prettyString() = when(this) {
-        Category1 -> "Dance"
-        Category2 -> "Misc"
-        Category3 -> "Drama"
+        Dance       -> "Dance"
+        Misc        -> "Misc"
+        Drama       -> "Drama"
+        Photography -> "Photography"
+        Oratory     -> "Oratory"
+        Music       -> "Music"
     }
 }

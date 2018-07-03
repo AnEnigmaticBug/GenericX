@@ -1,5 +1,6 @@
 package com.example.nishant.genericx.data.model
 
+import com.example.nishant.genericx.util.Constants
 import com.example.nishant.genericx.util.doubleDigitify
 import java.util.*
 
@@ -15,9 +16,9 @@ import java.util.*
  * Using an enum makes it simpler to use the filter and increases type-safety.
  * */
 enum class EventDay(val datetime: Date) {
-    Day1(Date(1541030400000)),
-    Day2(Date(1541116800000)),
-    Day3(Date(1541203200000));
+    Day1(Date(Date().time + 0*Constants.msInOneDay)),
+    Day2(Date(Date().time + 1*Constants.msInOneDay)),
+    Day3(Date(Date().time + 2*Constants.msInOneDay));
 
     /**
      * Converts to form suitable for display in UI as PageTitle.

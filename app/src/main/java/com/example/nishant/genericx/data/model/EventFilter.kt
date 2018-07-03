@@ -1,7 +1,5 @@
 package com.example.nishant.genericx.data.model
 
-import com.example.nishant.genericx.util.Constants
-
 /**
  * Created by AnEnigmaticBug on 26/6/18.
  */
@@ -29,7 +27,11 @@ class EventFilter(val categories: List<Category> = Category.values().toList(),
          * Tells us if the event happened on one of the days in @param days.
          * */
         private fun Event.happensOnOneOfDays(days: List<EventDay>) =
-                days.map { this.datetime.time in LongRange(it.datetime.time, it.datetime.time + Constants.msInOneDay) }.contains(true)
+                days.map {
+                    this.datetime.date == it.datetime.date &&
+                            this.datetime.month == it.datetime.month &&
+                            this.datetime.year == it.datetime.year
+                }.contains(true)
 
         private fun Event.satisfiesFavoriteCondition(condition: Boolean) =
                 when(condition) {
