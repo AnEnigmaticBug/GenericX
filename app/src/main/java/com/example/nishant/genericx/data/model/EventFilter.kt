@@ -41,7 +41,7 @@ class EventFilter(val categories: List<Category> = Category.values().toList(),
 
         private fun Event.satisfiesOngoingCondition(condition: Boolean) =
                 when(condition) {
-                    true  -> this.datetime.time < java.util.Date().time
+                    true  -> this.datetime.time > java.util.Date().time
                     false -> true
                 }
 
