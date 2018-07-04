@@ -31,3 +31,8 @@ These goals may or may not be implemented. These are 'nice to haves'. They're no
 - [ ] Setup unit tests.
 - [ ] Profile and make the app more efficient.
 - [ ] Optimize its size.
+
+
+# App Architecture:
+
+The app uses MVVM architecture with the Android Architecture Components and RxJava2. This is what I interpret MVVM is like. I'm still learning and so what I've written is just functioning code at best. To look at the exact architecture I've used, use the genericx_arch.pdf file I've supplied.
