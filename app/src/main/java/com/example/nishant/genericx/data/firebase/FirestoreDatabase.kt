@@ -2,11 +2,16 @@ package com.example.nishant.genericx.data.firebase
 
 import com.example.nishant.genericx.data.model.Category
 import com.example.nishant.genericx.data.model.Event
+import com.example.nishant.genericx.data.model.EventDay
 import com.example.nishant.genericx.data.model.Venue
 import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.subjects.BehaviorSubject
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
+import org.threeten.bp.ZoneOffset
 import java.util.*
 
 /**
@@ -34,10 +39,15 @@ class FirestoreDatabase {
                                 it.getString("description")!!,
                                 Category.valueOf(it.getString("category")!!),
                                 Venue.valueOf(it.getString("venue")!!),
-                                it.getDate("datetime")!!))
+                                it.getDate("datetime")!!.toLocalDateTime()))
                     }
                     subject.onNext(events)
                 }
+    }
+
+    private fun Date.toLocalDateTime(): LocalDateTime {
+        //LocalDateTime.ofEpochSecond(this.time/1000, 0, ZoneOffset.of(ZoneId.systemDefault().id))
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(this.time), ZoneId.systemDefault())
     }
 
     /**
@@ -45,12 +55,13 @@ class FirestoreDatabase {
      * */
     private fun populateFireStore() {
         val times = listOf(
-                Date().also { it.date += 0 },
-                Date().also { it.date += 1 },
-                Date().also { it.date += 2 }
+                Date(EventDay.Day1.date.toEpochDay()*(24*3600*1000).toLong()),
+                Date(EventDay.Day2.date.toEpochDay()*(24*3600*1000).toLong()),
+                Date(EventDay.Day3.date.toEpochDay()*(24*3600*1000).toLong())
+
         )
 
-        fun Date.copy() = this.clone() as Date
+        fun Date.copy() = (this.clone() as Date).also { it.minutes = 0 }
 
         val events = listOf(
                 FEvent("Portuguese Embassy", "", Category.Misc, Venue.Rotunda, times[0].copy().also { it.hours = 18 }),

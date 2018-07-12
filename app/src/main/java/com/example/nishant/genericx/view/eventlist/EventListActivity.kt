@@ -14,8 +14,7 @@ import android.widget.TextView
 import com.example.nishant.genericx.R
 import com.example.nishant.genericx.data.model.Criterion
 import com.example.nishant.genericx.data.model.Event
-import com.example.nishant.genericx.util.prettyDate
-import com.example.nishant.genericx.util.prettyTime
+import com.example.nishant.genericx.util.prettyString
 import com.example.nishant.genericx.util.setTint
 import com.example.nishant.genericx.view.eventlist.filter.FilterItemListFragment
 import com.example.nishant.genericx.view.eventlist.filter.FilterListType
@@ -116,7 +115,7 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, 
         override fun onBindViewHolder(holder: EventsVHolder, position: Int) {
             val event = events[position]
             holder.nameLBL.text = event.name
-            holder.timeLBL.text = event.datetime.prettyTime()
+            holder.timeLBL.text = event.datetime.toLocalTime().prettyString()
             holder.venueLBL.text = event.venue.prettyString()
             holder.categoryLBL.text = event.category.prettyString()
             when(event.isFavorite) {
@@ -155,8 +154,8 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, 
         override fun onBindViewHolder(holder: EventsVHolder, position: Int) {
             val event = events[position]
             holder.nameLBL.text = event.name
-            holder.dateLBL.text = event.datetime.prettyDate()
-            holder.timeLBL.text = event.datetime.prettyTime()
+            holder.dateLBL.text = event.datetime.toLocalDate().prettyString()
+            holder.timeLBL.text = event.datetime.toLocalTime().prettyString()
             holder.venueLBL.text = event.venue.prettyString()
             when(event.isFavorite) {
                 true  -> holder.favoriteBTN.setTint(R.color.wildStrawberry)

@@ -1,5 +1,7 @@
 package com.example.nishant.genericx.data.model
 
+import org.threeten.bp.LocalDateTime
+
 /**
  * Created by AnEnigmaticBug on 26/6/18.
  */
@@ -27,11 +29,7 @@ class EventFilter(val categories: List<Category> = Category.values().toList(),
          * Tells us if the event happened on one of the days in @param days.
          * */
         private fun Event.happensOnOneOfDays(days: List<EventDay>) =
-                days.map {
-                    this.datetime.date == it.datetime.date &&
-                            this.datetime.month == it.datetime.month &&
-                            this.datetime.year == it.datetime.year
-                }.contains(true)
+                days.map { this.datetime.toLocalDate() == it.date }.contains(true)
 
         private fun Event.satisfiesFavoriteCondition(condition: Boolean) =
                 when(condition) {
@@ -41,7 +39,7 @@ class EventFilter(val categories: List<Category> = Category.values().toList(),
 
         private fun Event.satisfiesOngoingCondition(condition: Boolean) =
                 when(condition) {
-                    true  -> this.datetime.time > java.util.Date().time
+                    true  -> this.datetime.isAfter(LocalDateTime.now())
                     false -> true
                 }
 

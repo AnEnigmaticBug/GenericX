@@ -2,41 +2,36 @@ package com.example.nishant.genericx.util
 
 import android.support.v4.content.ContextCompat
 import android.widget.ImageButton
-import java.util.*
+import org.threeten.bp.*
 
 /**
  * Created by AnEnigmaticBug on 26/6/18.
  */
 
 /**
+ * Represents numbers from 0-99 in the double digit form. For eg: 1 becomes "01" 81 becomes "81".
+ * */
+fun doubleDigitify(x: Int): String = when {
+        x < 0       -> throw IllegalArgumentException("doubleDigitify received negative argument")
+        x in 0..9   -> "0$x"
+        x in 10..99 -> x.toString()
+        else        -> throw IllegalArgumentException("doubleDigitify received >2 digit argument")
+}
+
+/**
  * Represents date in the format dd-mm-yyyy
  * */
-fun Date.prettyDate() = "${doubleDigitify(date)}-${doubleDigitify(month)}-$year"
+fun LocalDate.prettyString() = "${doubleDigitify(dayOfMonth)}-${doubleDigitify(monthValue)}-$year"
 
 /**
  * Represents time in the format hh:mm
  * */
-fun Date.prettyTime() = "${doubleDigitify(hours)}:${doubleDigitify(minutes)}"
+fun LocalTime.prettyString() = this.toString()
 
 /**
- * Represents numbers from 0-99 in the double digit form. For eg: 1 becomes "01" 81 becomes "81".
+ * Checks whether the LocalDateTime and @param localDate refer to the same day.
  * */
-fun doubleDigitify(x: Int): String {
-    if(x in 0..9) {
-        return "0$x"
-    }
-    else if(x in 10..99) {
-        return x.toString()
-    }
-    else if(x >= 100) {
-        throw IllegalArgumentException("doubleDigitify received >2 digit argument")
-    }
-    else {
-        throw IllegalArgumentException("doubleDigitify received negative argument")
-    }
-}
-
-fun Date.isOnSameDay(date: Date) = this.date == date.date && this.month == date.month && this.year == this.year
+fun LocalDateTime.isTheSameDay(localDate: LocalDate) = this.toLocalDate() == localDate
 
 /**
  * Returns the modulo of two numbers. Remainders can be negative making them unsuitable for use with

@@ -2,6 +2,7 @@ package com.example.nishant.genericx.data.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import org.threeten.bp.LocalDateTime
 import java.util.*
 
 /**
@@ -14,5 +15,5 @@ data class Event(@PrimaryKey val id: String = UUID.randomUUID().toString(),
                  val description: String,
                  val category: Category,
                  val venue: Venue,
-                 val datetime: Date,
+                 val datetime: LocalDateTime,
                  val isFavorite: Boolean = false)

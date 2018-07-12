@@ -3,6 +3,7 @@ package com.example.nishant.genericx.data.database
 import android.arch.persistence.room.TypeConverter
 import com.example.nishant.genericx.data.model.Category
 import com.example.nishant.genericx.data.model.Venue
+import org.threeten.bp.LocalDateTime
 import java.util.*
 
 /**
@@ -12,20 +13,23 @@ import java.util.*
 class TypeConverter {
 
     @TypeConverter
-    fun toDate(time: Long): Date = Date(time)
+    fun fromLongtoDate(time: Long): Date = Date(time)
 
     @TypeConverter
-    fun toLong(date: Date): Long = date.time
+    fun fromStringtoLocalDateTime(str: String): LocalDateTime = LocalDateTime.parse(str)
 
     @TypeConverter
-    fun toEventCategory(str: String): Category = Category.valueOf(str)
+    fun fromLocalDateTimetoLong(dateTime: LocalDateTime): String = dateTime.toString()
 
     @TypeConverter
-    fun toString(eventCategory: Category): String = eventCategory.toString()
+    fun fromStringtoEventCategory(str: String): Category = Category.valueOf(str)
 
     @TypeConverter
-    fun toVenue(str: String): Venue = Venue.valueOf(str)
+    fun fromEventCategorytoString(eventCategory: Category): String = eventCategory.toString()
 
     @TypeConverter
-    fun toString(venue: Venue): String = venue.toString()
+    fun fromStringtoVenue(str: String): Venue = Venue.valueOf(str)
+
+    @TypeConverter
+    fun fromVenuetoString(venue: Venue): String = venue.toString()
 }

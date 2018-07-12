@@ -11,5 +11,6 @@ import java.util.*
 /**
  * This is to retrieve data from Firebase. Firebase isn't concerned with favoriting. Also, the id
  * field is omitted because the id in FireStore is the document key. It is not stored in the fields.
+ * java.util.Date is used for datetime since its easier to get it to work with FireStore.
  * */
 data class FEvent(val name: String, val description: String, val category: Category, val venue: Venue, val datetime: Date)

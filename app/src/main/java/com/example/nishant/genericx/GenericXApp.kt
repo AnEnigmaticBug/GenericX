@@ -9,6 +9,7 @@ import com.example.nishant.genericx.di.AppComponent
 import com.example.nishant.genericx.di.AppModule
 import com.example.nishant.genericx.di.DaggerAppComponent
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jakewharton.threetenabp.AndroidThreeTen
 import java.util.*
 
 /**
@@ -24,5 +25,6 @@ class GenericXApp : Application() {
     override fun onCreate() {
         super.onCreate()
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        AndroidThreeTen.init(this)
     }
 }

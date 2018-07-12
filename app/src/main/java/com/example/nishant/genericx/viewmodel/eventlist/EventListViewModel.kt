@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel
 import com.example.nishant.genericx.GenericXApp
 import com.example.nishant.genericx.data.model.*
 import com.example.nishant.genericx.data.repository.EventRepository
-import com.example.nishant.genericx.util.isOnSameDay
+import com.example.nishant.genericx.util.isTheSameDay
 import com.example.nishant.genericx.util.modulo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -84,7 +84,7 @@ class EventListViewModel : ViewModel() {
 
     /**
      * This cute little variable is actually pretty critical to this app's functioning. If, in place
-     * of this, compositeDisposable was used, it would cause increasing an amount of flickering to
+     * of this, compositeDisposable was used, it would cause an increasing amount of flickering to
      * take place.
      *
      * This is because compositeDisposable would dispose its subscriptions only when the ViewModel
@@ -114,7 +114,7 @@ class EventListViewModel : ViewModel() {
 
         disposable?.dispose()
         disposable = filteredEvents
-                .map { it.filter { it.datetime.isOnSameDay(eventDay.datetime) } }
+                .map { it.filter { it.datetime.isTheSameDay(eventDay.date) } }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { (eventsToDisplay as MutableLiveData).value = it }
     }
