@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_filter_main_menu.view.*
 
 class FilterMainMenuFragment : Fragment() {
 
-    interface Listener : BaseFilterFragmentListener {
+    interface Listener : BaseFragmentListener {
 
         fun onSearchBTNClicked()
 

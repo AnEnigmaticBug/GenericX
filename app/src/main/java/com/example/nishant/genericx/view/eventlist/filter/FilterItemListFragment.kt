@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.row_filter_items_rcy.view.*
 
 class FilterItemListFragment : Fragment() {
 
-    interface Listener : BaseFilterFragmentListener {
+    interface Listener : BaseFragmentListener {
 
         fun showEventFilterMainMenu()
     }

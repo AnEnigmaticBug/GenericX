@@ -58,16 +58,25 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, 
         prevPageBTN.setOnClickListener { viewModel.showPrevPage() }
 
         filterBTN.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.filterMenuHolderFRM, FilterMainMenuFragment(), "FilterMenu")
-                    .commit()
+            //Ensures that the user can't open multiple menus by clicking the button multiple times.
+            if(supportFragmentManager.fragments.none { frag ->  frag is FilterMainMenuFragment }) {
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.filterMenuHolderFRM, FilterMainMenuFragment(), "FilterMenu")
+                        .commit()
+            }
         }
     }
 
 
 
     //Fragment related code
-
+    
+    /**
+     * It simple removes the last fragment rather than a particular fragment This is intentional.
+     * Because the last fragment is the one that is visible and therefore the one whose closeBTN can
+     * be clicked. So, clicking the button simply removes the last fragment since it always is the
+     * right thing to do.
+     * */
     override fun removeCurrentFragment() {
         supportFragmentManager.beginTransaction()
                 .remove(supportFragmentManager.fragments.last())
@@ -87,6 +96,19 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, 
     override fun showEventFilterMainMenu() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.filterMenuHolderFRM, FilterMainMenuFragment())
+                .commit()
+    }
+
+    private fun showEventDetails(event: Event) {
+        val bundle = Bundle().apply {
+            putString("EVENT_NAME", event.name)
+            putString("EVENT_CATEGORY", event.category.prettyString())
+            putString("EVENT_DATE", event.datetime.toLocalDate().prettyString())
+            putString("EVENT_TIME", event.datetime.toLocalTime().prettyString())
+            putString("EVENT_VENUE", event.venue.prettyString())
+        }
+        supportFragmentManager.beginTransaction()
+                .add(R.id.filterMenuHolderFRM, EventDetailsFragment().also { it.arguments = bundle }, "EventDetails")
                 .commit()
     }
 
@@ -124,6 +146,9 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, 
             }
             holder.favoriteBTN.setOnClickListener {
                 viewModel.toggleFavorite(event)
+            }
+            holder.rootPOV.setOnClickListener {
+                showEventDetails(event)
             }
         }
 
@@ -163,6 +188,9 @@ class EventListActivity : AppCompatActivity(), FilterMainMenuFragment.Listener, 
             }
             holder.favoriteBTN.setOnClickListener {
                 viewModel.toggleFavorite(event)
+            }
+            holder.rootPOV.setOnClickListener {
+                showEventDetails(event)
             }
         }
 
