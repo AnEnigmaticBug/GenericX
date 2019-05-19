@@ -1,3 +1,7 @@
+**NOTE:** This project is long dead. This was just me learning Android and trying out some stuff. It's here purely due to the fact that I consider it to be a part of my learning journey and don't want to delete it.
+
+# Overview:
+
 This app is intended to be used as the base upon which the official apps for Oasis18 and APOGEE19 are to be built. Emphasis on the word 'intended'. It may or may not be used. Most probably the latter. ;)
 
 # Road-Map:
